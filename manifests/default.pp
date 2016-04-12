@@ -85,31 +85,6 @@ class mysql{
     }
 }
 
-class phpmyadmin {
-    Exec { path => [ '/bin', '/sbin', '/usr/bin', '/usr/sbin', ] }
-
-    package { 'phpmyadmin':
-      ensure => present,
-    }
-
-    # linux way: ln -s /etc/phpmyadmin/apache.conf /etc/apache2/sites-available/phpmyadmin.conf
-    file { '/etc/apache2/sites-available/phpmyadmin.conf':
-      ensure => link,
-      target => '/etc/phpmyadmin/apache.conf',
-      require => Package['phpmyadmin'],
-    }
-
-    exec { 'enable-phpmyadmin':
-      command => 'sudo a2ensite phpmyadmin.conf',
-      require => File['/etc/apache2/sites-available/phpmyadmin.conf'],
-    }
-
-    exec { 'restart-apache':
-      command => 'sudo /etc/init.d/apache2 restart',
-      require => Exec['enable-phpmyadmin'],
-    }
-}
-
 include base
 include http
 include php
