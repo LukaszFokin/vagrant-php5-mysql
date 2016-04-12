@@ -71,10 +71,38 @@ And replace with:
         Options Indexes FollowSymLinks
         AllowOverride None
         Require all granted
+        Order allow,deny
+        Allow from all
 </Directory>
 ```
 
-After this, reload your apache
+After this, go to the configuration file of the Virtual Host:
+```sh
+$ vim /etc/apache2/sites-available/000-default.conf
+```
+
+Locate the block below within the 000-default.conf
+```sh
+DocumentRoot /var/www/html
+```
+
+Replace with:
+```sh
+DocumentRoot /vagrant/sites
+```
+
+And add the following block:
+```sh
+<Directory /vagrant/sites>
+        Options Indexes FollowSymLinks MultiViews
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+</Directory>
+
+```
+
+To finish, reload your apache
 
 ```sh
 $ service apache2 restart
