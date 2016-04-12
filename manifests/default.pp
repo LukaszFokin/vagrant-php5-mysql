@@ -90,12 +90,18 @@ class composer{
   package { "curl":
     ensure => installed,
   }
+
+  package { "git":
+    ensure => installed,
+  }
  
   exec { 'install composer':
-    command => 'curl -sS https://getcomposer.org/installer | php && sudo mv composer.phar /usr/local/bin/composer',
+    command => 'curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer',     			
     require => Package['curl'],
   } 
 }
+
+Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/", "/usr/local/bin", "/usr/local/sbin", "~/.composer/vendor/bin/" ] }
 
 include base
 include http
