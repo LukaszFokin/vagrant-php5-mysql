@@ -31,9 +31,20 @@ config.vm.network "private_network", ip: "new ip"
 
 To access your virtual machine via ssh you can use the default IP and the new IP you configured.
 
-The default port is 22.
+If you are using OSx or Linux OS, you can just type the following command in the terminal for ssh access.
 
-#### Teste
+```sh
+cd /path/where/you/cloned
+vagrant ssh
+```
+If you are using Windows, use Putty to ssh access.
+
+User and password default for ssh:
+
+user: vagrant
+pass: vagrant
+
+The default port is 22.
 
 ### HTTP access
 
