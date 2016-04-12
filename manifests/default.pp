@@ -101,3 +101,4 @@ include base
 include http
 include php
 include mysql
+include composer
