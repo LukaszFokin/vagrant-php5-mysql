@@ -14,6 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.network "private_network", ip: "10.0.10.100", :mount_options => ["dmode=777","fmode=666"]
+  config.vm.synced_folder "./sites/" , "/var/www/sites/", :mount_options => ["dmode=777","fmode=666"]
   config.vm.provider "virtualbox" do |vb|
     vb.customize ["modifyvm", :id, "--memory", "2048"]
   end
